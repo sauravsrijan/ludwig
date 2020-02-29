@@ -65,7 +65,7 @@ def learning_curves_plot(
         filename=None
 ):
     num_algorithms = len(train_values)
-    max_len = max([len(tv) for tv in train_values])
+    max_len = max(len(tv) for tv in train_values)
 
     fig, ax = plt.subplots()
 
@@ -140,7 +140,7 @@ def compare_classifiers_plot(
 
     colors = plt.get_cmap('tab10').colors
     if adaptive:
-        maximum = max([max(score) for score in scores])
+        maximum = max(max(score) for score in scores)
     else:
         ax.set_xlim([0, 1])
         ax.set_xticks(np.linspace(0.0, 1.0, num=21), minor=True)
@@ -284,7 +284,7 @@ def radar_chart(
     ground_truth = ground_truth[gt_argsort]
     predictions = [pred[gt_argsort] for pred in predictions]
 
-    maximum = max(max(ground_truth), max([max(p) for p in predictions]))
+    maximum = max(max(ground_truth), max(max(p) for p in predictions))
 
     ax = plt.subplot(111, polar=True)
     ax.set_theta_zero_location('N')
@@ -526,7 +526,7 @@ def confidence_fitlering_data_vs_acc_plot(
     colors = plt.get_cmap('tab10').colors
 
     max_dataset_kept = max(
-        [max(dataset_kept) for dataset_kept in dataset_kepts])
+        max(dataset_kept) for dataset_kept in dataset_kepts)
 
     x_ticks_minor = np.linspace(0.0, max_dataset_kept, num=21)
     x_ticks_major = np.linspace(0.0, max_dataset_kept, num=11)
@@ -592,7 +592,7 @@ def confidence_fitlering_data_vs_acc_multiline_plot(
     colors = plt.get_cmap('tab20').colors
 
     max_dataset_kept = max(
-        [max(dataset_kept) for dataset_kept in dataset_kepts])
+        max(dataset_kept) for dataset_kept in dataset_kepts)
 
     x_ticks_minor = np.linspace(0.0, max_dataset_kept, num=21)
     x_ticks_major = np.linspace(0.0, max_dataset_kept, num=11)

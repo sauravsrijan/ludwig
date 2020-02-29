@@ -506,7 +506,7 @@ class ParallelCNN(object):
             is_training=is_training
         )
         hidden_size = sum(
-            [conv_layer['num_filters'] for conv_layer in self.conv_layers]
+            conv_layer['num_filters'] for conv_layer in self.conv_layers
         )
         logger.debug('  hidden: {0}'.format(hidden))
 

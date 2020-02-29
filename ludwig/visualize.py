@@ -1537,8 +1537,8 @@ def compare_classifiers_predictions_distribution(
                 = labels_limit
 
     max_gt = max(ground_truth)
-    max_pred = max([max(alg_predictions)
-                    for alg_predictions in predictions_per_model])
+    max_pred = max(max(alg_predictions)
+                    for alg_predictions in predictions_per_model)
     max_val = max(max_gt, max_pred) + 1
 
     counts_gt = np.bincount(ground_truth, minlength=max_val)
@@ -2128,7 +2128,7 @@ def confidence_thresholding_2thresholds_2d(
 
     logger.info('CSV table')
     for row in table:
-        logger.info(','.join([str(e) for e in row]))
+        logger.info(','.join(str(e) for e in row))
 
     # ===========#
     # Multiline #
