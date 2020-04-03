@@ -34,7 +34,9 @@ NO_REGULARIZER = None
 DROPOUT_RATE = 0.5
 
 
-def create_encoder(encoder_type, encoder_args={}):
+def create_encoder(encoder_type, encoder_args=None):
+    if encoder_args is None:
+        encoder_args = {}
     encoder = encoder_type(**encoder_args)
     return encoder
 

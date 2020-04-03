@@ -302,9 +302,11 @@ def preprocess_for_training(
         data_test_hdf5=None,
         train_set_metadata_json=None,
         skip_save_processed_input=False,
-        preprocessing_params=default_preprocessing_parameters,
+        preprocessing_params=None,
         random_seed=default_random_seed
 ):
+    if preprocessing_params is None:
+        preprocessing_params = default_preprocessing_parameters
     # Sanity Check to make sure some data source is provided
     data_sources_provided = [data_df, data_train_df, data_csv, data_train_csv,
                              data_hdf5, data_train_hdf5]
@@ -369,9 +371,11 @@ def preprocess_for_training_by_type(
         test_df=None,
         train_set_metadata_json=None,
         skip_save_processed_input=False,
-        preprocessing_params=default_preprocessing_parameters,
+        preprocessing_params=None,
         random_seed=default_random_seed
 ):
+    if preprocessing_params is None:
+        preprocessing_params = default_preprocessing_parameters
     if all_data_fp is not None and train_fp is not None:
         raise ValueError('Use either one file for all data or 3 files for '
                          'train, test and validation')
@@ -577,7 +581,7 @@ def _preprocess_csv_for_training(
         data_test_csv=None,
         train_set_metadata_json=None,
         skip_save_processed_input=False,
-        preprocessing_params=default_preprocessing_parameters,
+        preprocessing_params=None,
         random_seed=default_random_seed
 ):
     """
@@ -594,6 +598,8 @@ def _preprocess_csv_for_training(
     :param random_seed: random seed
     :return: training, test, validation datasets, training metadata
     """
+    if preprocessing_params is None:
+        preprocessing_params = default_preprocessing_parameters
     train_set_metadata = None
     if train_set_metadata_json is not None:
         train_set_metadata = load_metadata(train_set_metadata_json)
@@ -707,13 +713,15 @@ def _preprocess_df_for_training(
         data_validation_df=None,
         data_test_df=None,
         train_set_metadata_json=None,
-        preprocessing_params=default_preprocessing_parameters,
+        preprocessing_params=None,
         random_seed=default_random_seed
 ):
     """ Method to pre-process dataframes. This doesn't have the option to save the
     processed data as hdf5 as we don't expect users to do this as the data can
     be processed in memory
     """
+    if preprocessing_params is None:
+        preprocessing_params = default_preprocessing_parameters
     train_set_metadata = None
     if train_set_metadata_json is not None:
         train_set_metadata = load_metadata(train_set_metadata_json)
