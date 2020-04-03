@@ -66,7 +66,8 @@ def feed_forward_attention(current_inputs, feature_hidden_size,
 
 
 def simple_memory_attention(current_inputs, context):
-    assert current_inputs.shape[2] == context.shape[2]
+    if current_inputs.shape[2] != context.shape[2]:
+        raise AssertionError
     # calculating attention
     attention = tf.nn.softmax(
         tf.matmul(current_inputs, context, transpose_b=True))  # [bs x s1 x s2]

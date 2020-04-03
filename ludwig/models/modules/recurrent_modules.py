@@ -67,7 +67,8 @@ class Projection(tf.compat.v1.layers.Layer):
     def call(self, inputs, **kwargs):
         inputs_shape = inputs.shape.as_list()
         weights_shape = self.projection_weights.shape.as_list()
-        assert inputs_shape[-1] == weights_shape[0]
+        if inputs_shape[-1] != weights_shape[0]:
+            raise AssertionError
         inputs = tf.reshape(inputs, [-1, inputs_shape[-1]])
 
         outputs = tf.matmul(inputs, self.projection_weights)

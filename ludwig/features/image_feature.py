@@ -213,9 +213,10 @@ class ImageBaseFeature(BaseFeature):
             user_specified_num_channels = False
             num_channels = first_img_num_channels
 
-        assert isinstance(num_channels, int), ValueError(
-            'Number of image channels needs to be an integer'
-        )
+        if not isinstance(num_channels, int):
+            raise AssertionError(ValueError(
+                'Number of image channels needs to be an integer'
+            ))
 
         return (
             should_resize,

@@ -118,8 +118,10 @@ def compare_classifiers_plot(
         title=None,
         filename=None
 ):
-    assert len(scores) == len(metrics)
-    assert len(scores) > 0
+    if len(scores) != len(metrics):
+        raise AssertionError
+    if len(scores) <= 0:
+        raise AssertionError
 
     num_metrics = len(metrics)
 
@@ -230,7 +232,8 @@ def compare_classifiers_multiclass_multimetric_plot(
         title=None,
         filename=None
 ):
-    assert len(scores) > 0
+    if len(scores) <= 0:
+        raise AssertionError
 
     sns.set_style('whitegrid')
 
@@ -448,7 +451,8 @@ def confidence_fitlering_plot(
         title=None,
         filename=None
 ):
-    assert len(accuracies) == len(dataset_kepts)
+    if len(accuracies) != len(dataset_kepts):
+        raise AssertionError
     num_algorithms = len(accuracies)
 
     sns.set_style('whitegrid')
@@ -519,7 +523,8 @@ def confidence_fitlering_data_vs_acc_plot(
         title=None,
         filename=None
 ):
-    assert len(accuracies) == len(dataset_kepts)
+    if len(accuracies) != len(dataset_kepts):
+        raise AssertionError
 
     sns.set_style('whitegrid')
 
@@ -585,7 +590,8 @@ def confidence_fitlering_data_vs_acc_multiline_plot(
         title=None,
         filename=None
 ):
-    assert len(accuracies) == len(dataset_kepts)
+    if len(accuracies) != len(dataset_kepts):
+        raise AssertionError
 
     sns.set_style('whitegrid')
 
@@ -642,8 +648,10 @@ def confidence_fitlering_3d_plot(
         title=None,
         filename=None
 ):
-    assert len(accuracies) == len(dataset_kepts)
-    assert len(thresholds_1) == len(thresholds_2)
+    if len(accuracies) != len(dataset_kepts):
+        raise AssertionError
+    if len(thresholds_1) != len(thresholds_2):
+        raise AssertionError
 
     thresholds_1, thresholds_2 = np.meshgrid(thresholds_1, thresholds_2)
 
@@ -830,7 +838,8 @@ def calibration_plot(
         algorithm_names=None,
         filename=None
 ):
-    assert len(fraction_positives) == len(mean_predicted_values)
+    if len(fraction_positives) != len(mean_predicted_values):
+        raise AssertionError
 
     sns.set_style('whitegrid')
 
@@ -851,7 +860,8 @@ def calibration_plot(
 
         # sns.tsplot(mean_predicted_values[i], fraction_positives[i], ax=ax1, color=colors[i])
 
-        assert len(mean_predicted_values[i]) == len(fraction_positives[i])
+        if len(mean_predicted_values[i]) != len(fraction_positives[i]):
+            raise AssertionError
         order = min(3, len(mean_predicted_values[i]) - 1)
 
         sns.regplot(mean_predicted_values[i], fraction_positives[i],
@@ -1129,8 +1139,10 @@ def bar_plot(
         title=None,
         filename=None
 ):
-    assert len(xs) == len(ys)
-    assert len(xs) > 0
+    if len(xs) != len(ys):
+        raise AssertionError
+    if len(xs) <= 0:
+        raise AssertionError
 
     sns.set_style('whitegrid')
 
