@@ -48,8 +48,9 @@ def get_group_delay(raw_data, sampling_rate_in_hz, window_length_in_s,
         X_stft_transform_imag, Y_stft_transform_imag)
     denominator = np.square(np.abs(X_stft_transform))
     group_delay = np.divide(nominator, denominator + 1e-10)
-    assert not np.isnan(
-        group_delay).any(), 'There are NaN values in group delay'
+    if np.isnan(
+        group_delay).any():
+        raise AssertionError('There are NaN values in group delay')
     return np.transpose(group_delay)
 
 

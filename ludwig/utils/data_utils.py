@@ -251,7 +251,8 @@ def split_data(split, data):
 
 def shuffle_unison_inplace(list_of_lists, random_state=None):
     if list_of_lists:
-        assert all(len(l) == len(list_of_lists[0]) for l in list_of_lists)
+        if not all(len(l) == len(list_of_lists[0]) for l in list_of_lists):
+            raise AssertionError
         if random_state is not None:
             p = random_state.permutation(len(list_of_lists[0]))
         else:

@@ -132,52 +132,61 @@ def get_default_optimizer_params(optimizer_type):
 
 
 def _perform_sanity_checks(model_definition):
-    assert 'input_features' in model_definition, (
-        'Model definition does not define any input features'
-    )
+    if 'input_features' not in model_definition:
+        raise AssertionError(
+            'Model definition does not define any input features'
+        )
 
-    assert 'output_features' in model_definition, (
-        'Model definition does not define any output features'
-    )
+    if 'output_features' not in model_definition:
+        raise AssertionError(
+            'Model definition does not define any output features'
+        )
 
-    assert isinstance(model_definition['input_features'], list), (
-        'Ludwig expects input features in a list. Check your model '
-        'definition format'
-    )
+    if not isinstance(model_definition['input_features'], list):
+        raise AssertionError(
+            'Ludwig expects input features in a list. Check your model '
+            'definition format'
+        )
 
-    assert isinstance(model_definition['output_features'], list), (
-        'Ludwig expects output features in a list. Check your model '
-        'definition format'
-    )
+    if not isinstance(model_definition['output_features'], list):
+        raise AssertionError(
+            'Ludwig expects output features in a list. Check your model '
+            'definition format'
+        )
 
-    assert len(model_definition['input_features']) > 0, (
-        'Model definition needs to have at least one input feature'
-    )
+    if len(model_definition['input_features']) <= 0:
+        raise AssertionError(
+            'Model definition needs to have at least one input feature'
+        )
 
-    assert len(model_definition['output_features']) > 0, (
-        'Model definition needs to have at least one output feature'
-    )
+    if len(model_definition['output_features']) <= 0:
+        raise AssertionError(
+            'Model definition needs to have at least one output feature'
+        )
 
     if TRAINING in model_definition:
-        assert isinstance(model_definition[TRAINING], dict), (
-            'There is an issue while reading the training section of the '
-            'model definition. The parameters are expected to be'
-            'read as a dictionary. Please check your model definition format.'
-        )
+        if not isinstance(model_definition[TRAINING], dict):
+            raise AssertionError(
+                'There is an issue while reading the training section of the '
+                'model definition. The parameters are expected to be'
+                'read as a dictionary. Please check your model definition format.'
+            )
 
     if 'preprocessing' in model_definition:
-        assert isinstance(model_definition['preprocessing'], dict), (
-            'There is an issue while reading the preprocessing section of the '
-            'model definition. The parameters are expected to be read'
-            'as a dictionary. Please check your model definition format.'
-        )
+        if not isinstance(model_definition['preprocessing'], dict):
+            raise AssertionError(
+                'There is an issue while reading the preprocessing section of the '
+                'model definition. The parameters are expected to be read'
+                'as a dictionary. Please check your model definition format.'
+            )
 
     if 'combiner' in model_definition:
-        assert isinstance(model_definition['combiner'], dict), (
-            'There is an issue while reading the combiner section of the '
-            'model definition. The parameters are expected to be read'
-            'as a dictionary. Please check your model definition format.'
-        )
+        if not isinstance(model_definition['combiner'], dict):
+            raise AssertionError(
+                'There is an issue while reading the combiner section of the '
+                'model definition. The parameters are expected to be read'
+                'as a dictionary. Please check your model definition format.'
+            )
 
 
 def merge_with_defaults(model_definition):
